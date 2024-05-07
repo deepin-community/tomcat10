@@ -1,0 +1,4 @@
+/etc/tomcat10                                /var/lib/tomcat10/conf
+/usr/share/doc/tomcat10-common/README.Debian /usr/share/doc/tomcat10/README.Debian
+/var/cache/tomcat10                          /var/lib/tomcat10/work
+/var/log/tomcat10                            /var/lib/tomcat10/logs

@@ -1,0 +1,46 @@
+From: Markus Koschany <apo@debian.org>
+Date: Wed, 1 Feb 2023 00:11:33 +0100
+Subject: disable-jacoco
+
+Forwarded: not-needed
+---
+ build.xml | 12 ------------
+ 1 file changed, 12 deletions(-)
+
+--- a/build.xml
++++ b/build.xml
+@@ -2025,10 +2025,6 @@
+ 
+     <sequential>
+       <mkdir dir="${test.reports}" />
+-      <jacoco:coverage
+-          enabled="${test.coverage}"
+-          destfile="${coverage.datafile}"
+-          >
+         <junit printsummary="yes" fork="yes" dir="." showoutput="${test.verbose}"
+           errorproperty="test.result.error"
+           failureproperty="test.result.failure"
+@@ -2103,7 +2099,6 @@
+             <fileset dir="test" includes="**/SecurityManager.java" excludes="${test.exclude}" />
+           </batchtest>
+         </junit>
+-      </jacoco:coverage>
+     </sequential>
+   </macrodef>
+ 
+@@ -3534,15 +3529,8 @@ asf.ldap.username=${release.asfusername}
+     <path id="jacoco.classpath">
+       <fileset file="${jacoco.jar}" />
+     </path>
+-
+-    <taskdef uri="antlib:org.jacoco.ant"
+-             resource="org/jacoco/ant/antlib.xml"
+-             classpathref="jacoco.classpath"
+-             />
+-
+   </target>
+ 
+-
+   <target name="download-spotbugs"
+           if="${execute.spotbugs}"
+           description="Download SpotBugs" >

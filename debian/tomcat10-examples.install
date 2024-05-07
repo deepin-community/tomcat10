@@ -1,0 +1,4 @@
+debian/context/examples.xml     /etc/tomcat10/Catalina/localhost/
+debian/policy/examples/*.policy /etc/tomcat10/policy.d/
+output/build/webapps/examples   /usr/share/tomcat10-examples/
+webapps/examples/WEB-INF/lib/taglibs-standard-*.jar   /usr/share/tomcat10-examples/examples/WEB-INF/lib/

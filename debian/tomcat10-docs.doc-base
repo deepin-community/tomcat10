@@ -1,0 +1,9 @@
+Document: tomcat10
+Title: Apache Tomcat 10 Documentation
+Author: Apache Software Foundation
+Abstract: Documentation bundle for Apache Tomcat 10 Servlet/JSP container.
+Section: System/Administration
+
+Format: HTML
+Index: /usr/share/doc/tomcat10-docs/docs/index.html
+Files: /usr/share/doc/tomcat10-docs/docs/*

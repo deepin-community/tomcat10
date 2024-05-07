@@ -1,0 +1,6 @@
+etc/logrotate.d
+etc/tomcat10/Catalina
+var/cache/tomcat10/
+var/lib/tomcat10/lib
+var/lib/tomcat10/webapps
+var/log/tomcat10/

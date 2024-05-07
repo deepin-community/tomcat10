@@ -1,0 +1,2 @@
+usr/share/java/tomcat10-embed-jasper.jar:
+ Class-Path: eclipse-jdt-core.jar

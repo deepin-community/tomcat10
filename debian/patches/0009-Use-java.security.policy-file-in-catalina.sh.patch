@@ -1,0 +1,42 @@
+From: Adam Guthrie <asguthrie@gmail.com>
+Date: Mon, 28 Jun 2010 21:53:50 +0200
+Subject: [PATCH] Use java.security.policy file in catalina.sh Make sure
+ catalina.sh uses the Debian/Ubuntu java.security.policy file location when
+ Tomcat is started with a security manager.
+
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/591802
+Bug-Debian: http://bugs.debian.org/585379
+Forwarded: not-needed
+---
+ bin/catalina.sh | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+--- a/bin/catalina.sh
++++ b/bin/catalina.sh
+@@ -348,7 +348,7 @@ if [ "$1" = "debug" ] ; then
+         -classpath "$CLASSPATH" \
+         -sourcepath "$CATALINA_HOME"/../../java \
+         -Djava.security.manager \
+-        -Djava.security.policy=="$CATALINA_BASE"/conf/catalina.policy \
++        -Djava.security.policy=="$CATALINA_BASE"/policy/catalina.policy \
+         -Dcatalina.base="$CATALINA_BASE" \
+         -Dcatalina.home="$CATALINA_HOME" \
+         -Djava.io.tmpdir="$CATALINA_TMPDIR" \
+@@ -375,7 +375,7 @@ elif [ "$1" = "run" ]; then
+     eval exec "\"$_RUNJAVA\"" "\"$CATALINA_LOGGING_CONFIG\"" $LOGGING_MANAGER "$JAVA_OPTS" "$CATALINA_OPTS" \
+       -classpath "\"$CLASSPATH\"" \
+       -Djava.security.manager \
+-      -Djava.security.policy=="\"$CATALINA_BASE/conf/catalina.policy\"" \
++      -Djava.security.policy=="\"$CATALINA_BASE/policy/catalina.policy\"" \
+       -Dcatalina.base="\"$CATALINA_BASE\"" \
+       -Dcatalina.home="\"$CATALINA_HOME\"" \
+       -Djava.io.tmpdir="\"$CATALINA_TMPDIR\"" \
+@@ -454,7 +454,7 @@ elif [ "$1" = "start" ] ; then
+     eval $_NOHUP "\"$_RUNJAVA\"" "\"$CATALINA_LOGGING_CONFIG\"" $LOGGING_MANAGER "$JAVA_OPTS" "$CATALINA_OPTS" \
+       -classpath "\"$CLASSPATH\"" \
+       -Djava.security.manager \
+-      -Djava.security.policy=="\"$CATALINA_BASE/conf/catalina.policy\"" \
++      -Djava.security.policy=="\"$CATALINA_BASE/policy/catalina.policy\"" \
+       -Dcatalina.base="\"$CATALINA_BASE\"" \
+       -Dcatalina.home="\"$CATALINA_HOME\"" \
+       -Djava.io.tmpdir="\"$CATALINA_TMPDIR\"" \
