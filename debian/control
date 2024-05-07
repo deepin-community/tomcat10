@@ -1,15 +1,157 @@
-Source: template-repository
-Section: unknown
+Source: tomcat10
+Section: java
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders:
+ tony mancill <tmancill@debian.org>,
+ Emmanuel Bourg <ebourg@apache.org>,
+ Markus Koschany <apo@debian.org>
+Build-Depends:
+ ant-optional,
+ bnd (>= 5.0.1),
+ debhelper-compat (= 13),
+ default-jdk,
+ javahelper,
+ junit4 (>= 4.11),
+ libcglib-nodep-java,
+ libeasymock-java (>= 3.0),
+ libeclipse-jdt-core-java (>= 3.26.0),
+ libhamcrest-java (>= 1.3),
+ libjaxrpc-api-java,
+ libobjenesis-java,
+ libtaglibs-standard-impl-java,
+ libtaglibs-standard-spec-java,
+ libtcnative-1 (>= 1.2.35),
+ libwsdl4j-java,
+ lsb-release,
+ maven-repo-helper,
+ tomcat-jakartaee-migration (>= 1.0.7-2~)
+Standards-Version: 4.7.0
+Vcs-Git: https://salsa.debian.org/java-team/tomcat10.git
+Vcs-Browser: https://salsa.debian.org/java-team/tomcat10
+Homepage: http://tomcat.apache.org
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: tomcat10-common
+Architecture: all
+Depends:
+ default-jre-headless | java11-runtime-headless | java11-runtime,
+ libtomcat10-java (>= ${source:Version}),
+ ${misc:Depends}
+Description: Apache Tomcat 10 - Servlet and JSP engine -- common files
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains common files needed by the tomcat10 and tomcat10-user
+ packages (Tomcat 10 scripts and libraries).
+
+Package: tomcat10
+Architecture: all
+Depends:
+ systemd (>= 238) | systemd-sysusers,
+ systemd (>= 238) | systemd-tmpfiles,
+ tomcat10-common (>= ${source:Version}),
+ ucf,
+ ${misc:Depends}
+Recommends:
+ libtcnative-1 (>= 1.2.18)
+Suggests:
+ tomcat10-admin (>= ${source:Version}),
+ tomcat10-docs (>= ${source:Version}),
+ tomcat10-examples (>= ${source:Version}),
+ tomcat10-user (>= ${source:Version})
+Description: Apache Tomcat 10 - Servlet and JSP engine
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains only the startup scripts for the system-wide daemon.
+ No documentation or web applications are included here, please install
+ the tomcat10-docs and tomcat10-examples packages if you want them.
+ Install tomcat10-user instead of this package if you don't want Tomcat to
+ start as a service.
+
+Package: tomcat10-user
+Architecture: all
+Depends:
+ netcat-openbsd,
+ tomcat10-common (>= ${source:Version}),
+ ${misc:Depends}
+Suggests:
+ tomcat10 (>= ${source:Version}),
+ tomcat10-admin (>= ${source:Version}),
+ tomcat10-docs (>= ${source:Version}),
+ tomcat10-examples (>= ${source:Version})
+Description: Apache Tomcat 10 - Servlet and JSP engine -- tools to create user instances
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains files needed to create a user Tomcat instance.
+ This user Tomcat instance can be started and stopped using the scripts
+ provided in the Tomcat instance directory.
+
+Package: libtomcat10-java
+Architecture: all
+Depends:
+ libeclipse-jdt-core-java (>= 3.26.0),
+ ${misc:Depends}
+Suggests:
+ tomcat10 (>= ${source:Version})
+Description: Apache Tomcat 10 - Servlet and JSP engine -- core libraries
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains the Tomcat core classes which can be used by other
+ Java applications to embed Tomcat.
+
+Package: libtomcat10-embed-java
+Architecture: all
+Depends:
+ libeclipse-jdt-core-java (>= 3.26.0),
+ ${misc:Depends}
+Description: Apache Tomcat 10 - Servlet and JSP engine -- embed libraries
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains the libraries required to embed Tomcat into Java
+ applications.
+
+Package: tomcat10-admin
+Architecture: all
+Depends:
+ tomcat10-common (>= ${source:Version}),
+ ${misc:Depends}
+Description: Apache Tomcat 10 - Servlet and JSP engine -- admin web applications
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains the administrative web interfaces.
+
+Package: tomcat10-examples
+Architecture: all
+Depends:
+ tomcat10-common (>= ${source:Version}),
+ ${misc:Depends}
+Description: Apache Tomcat 10 - Servlet and JSP engine -- example web applications
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains the default Tomcat example webapps.
+
+Package: tomcat10-docs
+Section: doc
+Architecture: all
+Depends:
+ tomcat10-common (>= ${source:Version}),
+ ${misc:Depends}
+Description: Apache Tomcat 10 - Servlet and JSP engine -- documentation
+ Apache Tomcat implements the Java Servlet and the JavaServer Pages (JSP)
+ specifications from Oracle, and provides a "pure Java" HTTP web
+ server environment for Java code to run.
+ .
+ This package contains the online documentation web application.

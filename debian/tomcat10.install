@@ -1,0 +1,11 @@
+conf/*.xml                 /usr/share/tomcat10/etc/
+conf/catalina.properties   /usr/share/tomcat10/etc/
+debian/default.template    /usr/share/tomcat10/
+debian/default_root        /usr/share/tomcat10-root/
+debian/libexec/tomcat-start.sh         /usr/libexec/tomcat10/
+debian/libexec/tomcat-update-policy.sh /usr/libexec/tomcat10/
+debian/logging.properties  /usr/share/tomcat10/etc/
+debian/logrotate.template  /usr/share/tomcat10/
+debian/policy/*.policy     /etc/tomcat10/policy.d/
+debian/rsyslog/*           /etc/rsyslog.d/
+debian/sysusers/*.conf     /usr/lib/sysusers.d/

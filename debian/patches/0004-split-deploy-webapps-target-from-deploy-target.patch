@@ -1,0 +1,30 @@
+From: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Date: Mon, 28 Jun 2010 21:32:35 +0200
+Subject: [PATCH] split deploy-webapps target from deploy target
+
+---
+ build.xml | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+--- a/build.xml
++++ b/build.xml
+@@ -1494,7 +1494,7 @@
+     </xslt>
+   </target>
+ 
+-  <target name="deploy" depends="package,build-docs,build-tomcat-jdbc,compile-webapp-examples"
++  <target name="deploy" depends="package,build-docs,build-tomcat-jdbc,compile-webapp-examples,deploy-webapps"
+           description="Default. Builds a working Tomcat instance">
+ 
+     <copy tofile="${tomcat.build}/bin/commons-daemon.jar" file="${commons-daemon.jar}" />
+@@ -1528,6 +1528,10 @@
+       </fileset>
+     </copy>
+ 
++  </target>
++
++  <target name="deploy-webapps" depends="package,build-docs">
++
+     <!-- Copy other regular webapps -->
+     <copy todir="${tomcat.build}/webapps">
+       <fileset dir="webapps">

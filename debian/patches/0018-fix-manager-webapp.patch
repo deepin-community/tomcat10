@@ -1,0 +1,77 @@
+From: "ubuntu@iam.tj" <ubuntu@iam.tj>
+Date: Mon, 16 Jan 2023 23:22:18 +0100
+Subject: This patch changes the manager path from webapps/manager to
+
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1128067
+Reviewed-By: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Last-Update: 2013-08-01
+
+../tomcat10-admin/manager
+---
+ conf/catalina.policy                     | 10 +++++-----
+ webapps/docs/manager-howto.xml           |  2 +-
+ webapps/host-manager/WEB-INF/manager.xml |  2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+--- a/conf/catalina.policy
++++ b/conf/catalina.policy
+@@ -188,7 +188,7 @@ grant {
+ // - default CATALINA_HOME == CATALINA_BASE
+ // - CATALINA_HOME != CATALINA_BASE, per instance Manager in CATALINA_BASE
+ // - CATALINA_HOME != CATALINA_BASE, shared Manager in CATALINA_HOME
+-grant codeBase "file:${catalina.base}/webapps/manager/-" {
++grant codeBase "file:${catalina.base}/../tomcat10-admin/manager/-" {
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina";
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.ha.session";
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager";
+@@ -196,7 +196,7 @@ grant codeBase "file:${catalina.base}/we
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.util";
+     permission org.apache.catalina.security.DeployXmlPermission "manager";
+ };
+-grant codeBase "file:${catalina.home}/webapps/manager/-" {
++grant codeBase "file:${catalina.home}/../tomcat10-admin/manager/-" {
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina";
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.ha.session";
+     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager";
+@@ -211,10 +211,10 @@ grant codeBase "file:${catalina.home}/we
+ // - default CATALINA_HOME == CATALINA_BASE
+ // - CATALINA_HOME != CATALINA_BASE, per instance Host Manager in CATALINA_BASE
+ // - CATALINA_HOME != CATALINA_BASE, shared Host Manager in CATALINA_HOME
+-grant codeBase "file:${catalina.base}/webapps/host-manager/-" {
++grant codeBase "file:${catalina.base}/../tomcat10-admin/host-manager/-" {
+     permission org.apache.catalina.security.DeployXmlPermission "host-manager";
+ };
+-grant codeBase "file:${catalina.home}/webapps/host-manager/-" {
++grant codeBase "file:${catalina.home}/../tomcat10-admin/host-manager/-" {
+     permission org.apache.catalina.security.DeployXmlPermission "host-manager";
+ };
+ 
+@@ -260,4 +260,4 @@ grant codeBase "file:${catalina.home}/we
+ //
+ // The permissions granted to a specific JAR
+ // grant codeBase "war:file:${catalina.base}/webapps/examples.war*/WEB-INF/lib/foo.jar" {
+-// };
+\ No newline at end of file
++// };
+--- a/webapps/docs/manager-howto.xml
++++ b/webapps/docs/manager-howto.xml
+@@ -74,7 +74,7 @@ configuration file in the
+ <code>$CATALINA_BASE/conf/[enginename]/[hostname]</code> folder. Here is an
+ example:</p>
+ <source><![CDATA[<Context privileged="true" antiResourceLocking="false"
+-         docBase="${catalina.home}/webapps/manager">
++         docBase="${catalina.home}/../tomcat10-admin/manager">
+   <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                    sameSiteCookies="strict" />
+   <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+--- a/webapps/host-manager/WEB-INF/manager.xml
++++ b/webapps/host-manager/WEB-INF/manager.xml
+@@ -20,7 +20,7 @@
+     Context configuration file for the Tomcat Manager Web App
+ 
+ -->
+-<Context docBase="${catalina.home}/webapps/manager"
++<Context docBase="${catalina.home}/../tomcat10-admin/manager"
+          privileged="true" antiResourceLocking="false" >
+   <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                    sameSiteCookies="strict" />

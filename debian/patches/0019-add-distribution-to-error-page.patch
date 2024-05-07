@@ -1,0 +1,34 @@
+From: Yolanda Robla <yolanda.robla@canonical.com>
+Date: Mon, 16 Jan 2023 23:22:18 +0100
+Subject: Adds the name of the distribution to the version of Tomcat
+
+Forwarded: not-needed
+Bug-Debian: http://bugs.debian.org/729840
+
+reported on the error pages (i.e. 'Apache Tomcat/8.0.x (Debian)')
+---
+ build.xml                                           | 1 +
+ java/org/apache/catalina/util/ServerInfo.properties | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+--- a/build.xml
++++ b/build.xml
+@@ -284,6 +284,7 @@
+     <filter token="YEAR" value="${year}"/>
+     <filter token="VERSION" value="${version}"/>
+     <filter token="VERSION_NUMBER" value="${version.number}"/>
++    <filter token="TOMCAT_DISTRIBUTION" value="${distribution.name}"/>
+     <filter token="VERSION_MAJOR" value="${version.major}"/>
+     <filter token="VERSION_MAJOR_MINOR" value="${version.major.minor}"/>
+     <filter token="VERSION_BUILT" value="${today} ${tstamp} UTC"/>
+--- a/java/org/apache/catalina/util/ServerInfo.properties
++++ b/java/org/apache/catalina/util/ServerInfo.properties
+@@ -13,7 +13,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-server.info=Apache Tomcat/@VERSION@
++server.info=Apache Tomcat/@VERSION@ (@TOMCAT_DISTRIBUTION@)
+ server.number=@VERSION_NUMBER@
+ server.built=@VERSION_BUILT@
+ server.built.iso=@VERSION_BUILT_ISO@
